@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LIBRI-Tutor · Tutor socrático de Matemáticas Básicas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+:root{--bg:#f4f8fb;--ink:#14213d;--muted:#506078;--card:#fff;--line:#d9e3ee;--brand:#0b7f74;--onbrand:#fff;--u1:#0b7f74;--u2:#d44a31;--u3:#5b47c9;--sun:#ffc83d;--hero:#16264a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0e1626;--ink:#e9eef8;--muted:#a1b0c8;--card:#16233b;--line:#2a3d5e;--brand:#3ccfbf;--onbrand:#0e1626;--u1:#3ccfbf;--u2:#ff8a73;--u3:#a99bff;--hero:#1b2c4d}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1626;--ink:#e9eef8;--muted:#a1b0c8;--card:#16233b;--line:#2a3d5e;--brand:#3ccfbf;--onbrand:#0e1626;--u1:#3ccfbf;--u2:#ff8a73;--u3:#a99bff;--hero:#1b2c4d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Source Sans 3",system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:20px 16px 90px}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.12;margin:0}
+h2{font-size:clamp(1.55rem,5vw,2rem);margin-bottom:8px}
+section{margin-top:52px;scroll-margin-top:16px}
+.hero{background:var(--hero);color:#fff;border-radius:20px;padding:32px 24px;display:grid;gap:20px;align-items:center}
+@media (min-width:760px){.hero{grid-template-columns:1.3fr 1fr;padding:44px 40px}}
+.hero h1{font-size:clamp(2.6rem,9vw,4rem);font-weight:800;letter-spacing:-.02em}
+.hero .tag{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:clamp(1.25rem,4vw,1.6rem);margin:10px 0 8px;color:var(--sun)}
+.hero p{margin:0 0 18px;max-width:34em;color:#e3ebfa}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+a.btn,button{font:inherit;font-weight:600;border:2px solid var(--brand);background:var(--card);color:var(--brand);padding:10px 18px;border-radius:999px;cursor:pointer;text-decoration:none;min-height:44px}
+a.btn.sun{background:var(--sun);border-color:var(--sun);color:#16264a}
+a.btn.line{background:transparent;border-color:#fff;color:#fff}
+button.primary{background:var(--brand);color:var(--onbrand)}
+a.btn:hover,button:hover{border-color:var(--sun)}
+button:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+svg.plot{width:100%;height:auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.step b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--brand);color:var(--onbrand);margin-bottom:8px}
+.step h3{font-size:1.2rem;margin-bottom:4px}.step p{margin:0;color:var(--muted)}
+.lead{color:var(--muted);margin:0 0 6px;max-width:40em}
+.unit h3{font-size:1.3rem;margin:30px 0 8px;color:var(--c)}
+.unit h3 small{display:block;font:400 1rem "Source Sans 3",system-ui,sans-serif;color:var(--muted);margin-top:2px}
+details{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;margin:10px 0;padding:0 18px}
+summary{cursor:pointer;font-weight:600;font-size:1.05rem;padding:14px 0;min-height:44px}
+details[open] summary{color:var(--c)}
+details p{margin:0 0 10px}
+details b{color:var(--c)}
+.ex{background:color-mix(in srgb,var(--c) 11%,var(--card));border-radius:10px;padding:10px 14px}
+details button{margin:2px 0 16px;font-size:.95rem;padding:7px 16px;color:var(--c);border-color:var(--c)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+#log{max-height:440px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.msg{padding:10px 14px;border-radius:14px;max-width:92%;overflow-wrap:anywhere}
+.msg p{margin:0 0 .5em}.msg p:last-child{margin:0}.msg ul{margin:.3em 0;padding-left:1.2em}
+.me{align-self:flex-end;background:var(--brand);color:var(--onbrand)}
+.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chips button{font-weight:400;font-size:.95rem;padding:6px 14px;min-height:40px}
+textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px;resize:vertical;min-height:84px}
+.row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.note{font-size:.9rem;color:var(--muted);margin-top:12px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--sun);color:#16264a;font-weight:600;padding:11px 18px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:5}
+footer{margin-top:52px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<div>
+<h1>LIBRI-Tutor</h1>
+<p class="tag">Las matemáticas no se memorizan: se descubren.</p>
+<p>Un tutor que no te da la respuesta: te hace las preguntas correctas para que la construyas tú. Aprende a tu ritmo, practica sin límite y entiende de verdad.</p>
+<div class="cta"><a class="btn sun" href="#temas">Empezar a aprender</a><a class="btn line" href="#tutor">Hablar con el tutor</a></div>
+</div>
+<svg class="plot" viewBox="0 0 320 220" role="img" aria-label="Parábola sobre ejes cartesianos">
+<g fill="none" stroke="#e3ebfa" stroke-width="1.5" opacity=".9"><path d="M20 170H305M80 20V205"/></g>
+<path d="M95 45C130 230 230 230 265 45" fill="none" stroke="#ffc83d" stroke-width="5" stroke-linecap="round"/>
+<circle cx="180" cy="160" r="7" fill="#3ccfbf"/>
+<text x="196" y="150" fill="#fff" font-size="15">¿y si cambias a?</text>
+</svg>
+</header>
+
+<section>
+<h2>Tu ruta en 3 pasos</h2>
+<div class="steps">
+<div class="step"><b>1</b><h3>Explora</h3><p>Mira el concepto en acción con GeoGebra o Desmos.</p></div>
+<div class="step"><b>2</b><h3>Intenta</h3><p>Resuelve el ejercicio y cuéntale tu procedimiento al tutor.</p></div>
+<div class="step"><b>3</b><h3>Mejora</h3><p>Recibe pistas, corrige y explica por qué funciona.</p></div>
+</div>
+</section>
+
+<section id="temas">
+<h2>Domina cada tema</h2>
+<p class="lead">Cada tema trae el concepto, cómo se representa, una analogía y un reto. Abre, lee y practica.</p>
+<div id="units"></div>
+</section>
+
+<section>
+<h2>Mira las matemáticas en movimiento</h2>
+<p class="lead">Grafica, mueve y experimenta antes de resolver.</p>
+<div class="links">
+<a class="btn" href="https://www.geogebra.org/graphing" target="_blank" rel="noopener">Abrir GeoGebra</a>
+<a class="btn" href="https://www.desmos.com/calculator" target="_blank" rel="noopener">Abrir Desmos</a>
+<a class="btn" href="https://es.khanacademy.org/math" target="_blank" rel="noopener">Abrir Khan Academy</a>
+</div>
+</section>
+
+<section id="tutor">
+<h2>Tu tutor está listo</h2>
+<p class="lead">Pide un ejercicio, revisa tu procedimiento o resuelve una duda. Te guía con pistas, no con respuestas.</p>
+<div class="panel">
+<div id="log" aria-live="polite"><div class="msg bot"><p>Hola. Cuéntame qué concepto o ejercicio de Matemáticas Básicas quieres trabajar hoy.</p></div></div>
+<div class="chips">
+<button type="button" data-q="Dame un ejercicio de práctica para empezar.">Dame un ejercicio</button>
+<button type="button" data-q="Tengo un ejercicio y quiero revisar mi procedimiento.">Revisa mi procedimiento</button>
+<button type="button" data-q="Quiero más ejercicios del mismo tema, un poco más difíciles.">Quiero más ejercicios</button>
+</div>
+<label for="inp" class="note">Tu mensaje</label>
+<textarea id="inp" placeholder="Escribe tu duda o tu procedimiento paso a paso"></textarea>
+<div class="row"><button type="button" id="send" class="primary" disabled>Enviar</button><button type="button" id="reset">Empezar de nuevo</button></div>
+<p class="note" id="nochat" hidden>No se pudo conectar con el servidor del tutor. Verifica que el backend esté publicado y que API_BASE esté configurada.</p>
+<p class="note">No escribas tu nombre, documento ni correo. El tutor solo necesita tu razonamiento matemático.</p>
+</div>
+</section>
+
+<section>
+<h2>Siempre con respaldo docente</h2>
+<p class="lead">El tutor apoya tu aprendizaje y no lo reemplaza. Si una dificultad persiste después de varios intentos, consulta a tu docente: puede revisar tu avance y orientar el siguiente paso.</p>
+</section>
+
+<footer>Prototipo EDUTECH 3.0 · Unicomfacauca · Grupo 50</footer>
+<a class="fab" href="#tutor">Hablar con el tutor</a>
+</main>
+
+<script>
+// URL pública del backend Flask. Reemplaza este valor después de desplegarlo.
+const API_BASE = 'https://TU-SERVICIO.onrender.com';
+const $ = id => document.getElementById(id);
+let hist = [], busy = false;
+
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function md(s){
+  let out='', inList=false;
+  for (const l of esc(s).split('\n')) {
+    const m = l.match(/^\s*[-*•]\s+(.*)/);
+    if (m) { if(!inList){out+='<ul>';inList=true;} out+='<li>'+m[1]+'</li>'; }
+    else { if(inList){out+='</ul>';inList=false;} if(l.trim()) out+='<p>'+l+'</p>'; }
+  }
+  if (inList) out+='</ul>';
+  return out.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+}
+function add(cls, html){
+  const d = document.createElement('div');
+  d.className = 'msg ' + cls; d.innerHTML = html;
+  $('log').appendChild(d); $('log').scrollTop = $('log').scrollHeight;
+  return d;
+}
+
+async function send(){
+  const message = $('inp').value.trim();
+  if (!message || busy) return;
+
+  busy = true;
+  $('send').disabled = true;
+  $('inp').value = '';
+  add('me', '<p>' + esc(message) + '</p>');
+  hist.push({role:'user', content:message});
+  const bubble = add('bot', '<p>Pensando…</p>');
+
+  try {
+    const response = await fetch(`${API_BASE.replace(/\/$/, '')}/api/chat`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({messages: hist})
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `Error del servidor (${response.status})`);
+    if (!data.reply) throw new Error('El servidor no devolvió una respuesta.');
+
+    bubble.innerHTML = md(data.reply);
+    hist.push({role:'assistant', content:data.reply});
+  } catch (error) {
+    hist.pop();
+    bubble.textContent = `No se pudo obtener respuesta: ${error.message}. Inténtalo de nuevo.`;
+  } finally {
+    busy = false;
+    $('send').disabled = false;
+    $('inp').focus();
+  }
+}
+$('send').onclick = send;
+$('inp').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) send(); });
+$('reset').onclick = () => { hist = []; $('log').innerHTML = '<div class="msg bot"><p>Hola. Cuéntame qué concepto o ejercicio de Matemáticas Básicas quieres trabajar hoy.</p></div>'; $('inp').value = ''; };
+document.addEventListener('click', e => { const b = e.target.closest('.chips button, .ask'); if (!b) return; $('inp').value = b.dataset.q; $('inp').scrollIntoView({block:'center'}); $('inp').focus(); });
+
+const U = [
+{t:'Unidad 1. Lógica, conjuntos y sistemas numéricos', s:'Piensa con precisión', c:'u1', k:[
+{n:'Proposiciones lógicas',
+ c:'Una proposición es un enunciado que es verdadero (V) o falso (F), pero no ambos. Se combinan con conectivos: negación, conjunción («y»), disyunción («o»), condicional («si… entonces…») y bicondicional. Dos proposiciones son equivalentes si tienen la misma tabla de verdad.',
+ r:'Con letras p, q, r y símbolos: ¬p, p ∧ q, p ∨ q, p → q, p ↔ q. Se analizan en una tabla de verdad. Por ejemplo, p ∧ q solo es verdadera si p y q lo son, y p ∨ q solo es falsa si ambas lo son.',
+ a:'Una proposición es un interruptor: encendido o apagado, nunca a medias. «Y» exige los dos encendidos; «o» basta con uno.',
+ e:'¿Cuáles son proposiciones: «7 es primo», «¿qué hora es?», «x + 2 = 5»? Si p es verdadera y q es falsa, ¿qué valor tiene p ∧ q?'},
+{n:'Conjuntos',
+ c:'Un conjunto es una colección de objetos, llamados elementos, con una característica común. Un elemento pertenece (∈) o no pertenece (∉) al conjunto. Operaciones: unión (en A o en B), intersección (en ambos), diferencia (en A pero no en B) y complemento (lo que falta para el universal U).',
+ r:'Por extensión: A = {2, 4, 6, 8}. Por comprensión: A = {x | x es par y 2 ≤ x ≤ 8}. Símbolos: A ∪ B, A ∩ B, A − B, A′. Se dibujan con diagramas de Venn.',
+ a:'Un conjunto es una mochila: lo que lleva dentro son sus elementos.',
+ e:'Con A = {2, 4, 6, 8} y B = {1, 2, 3, 4}, halla A ∪ B y A ∩ B, y escribe B por comprensión.'},
+{n:'Conjuntos numéricos',
+ c:'Naturales ℕ (1, 2, 3…), enteros ℤ (…, −1, 0, 1…), racionales ℚ (fracciones a/b con b ≠ 0), irracionales (decimales infinitos sin periodo, como √2 y π) y reales ℝ (racionales e irracionales juntos). Cada uno contiene al anterior: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ.',
+ r:'Se ubican en la recta numérica. Los subconjuntos de ℝ se escriben como intervalos: (a, b) no incluye los extremos y [a, b] sí los incluye.',
+ a:'Son muñecas rusas: los naturales caben dentro de los enteros, estos dentro de los racionales y estos dentro de los reales.',
+ e:'Para −3, 1/2, √2 y 5, indica el conjunto numérico más específico al que pertenece cada uno.'},
+{n:'Valor absoluto y ley de signos',
+ c:'El valor absoluto de a es su distancia al cero: |a| = a si a ≥ 0 y |a| = −a si a < 0. Siempre es mayor o igual que cero y cumple |a·b| = |a|·|b|. Ley de signos: signos iguales dan producto positivo y signos distintos dan producto negativo.',
+ r:'Se escribe con barras: |−7| = 7. En la recta numérica es la longitud del segmento entre el número y el 0.',
+ a:'El valor absoluto es la distancia a casa: da igual si caminas al norte o al sur. Dos negaciones se cancelan, como «no es verdad que no vine».',
+ e:'Calcula |−7| + |3| y (−2)(−5) − 4.'},
+{n:'Potenciación, radicación y logaritmos',
+ c:'Potencia: aⁿ es a multiplicada n veces por sí misma. Raíz: ⁿ√a = b significa que bⁿ = a. Logaritmo: log_a(x) = n significa que aⁿ = x (con a > 0, a ≠ 1 y x > 0). Propiedades: aᵐ · aⁿ = aᵐ⁺ⁿ, (aᵐ)ⁿ = aᵐⁿ y log(x·y) = log x + log y.',
+ r:'El exponente va arriba a la derecha (2⁵), el radical se escribe √ con el índice sobre él, y la base del logaritmo va como subíndice (log₂ 8).',
+ a:'Potenciar es duplicar una célula varias veces; la raíz deshace la potencia; y el logaritmo pregunta: «¿cuántas veces multipliqué?».',
+ e:'Calcula 2⁵, √49 y log₂ 8.'}
+]},
+{t:'Unidad 2. Álgebra básica, ecuaciones e inecuaciones', s:'Álgebra en acción', c:'u2', k:[
+{n:'Álgebra y productos notables',
+ c:'El álgebra generaliza la aritmética usando letras (variables) y números (constantes). Una expresión algebraica combina términos como 3x² + 5x − 2. Los productos notables son multiplicaciones con resultado conocido: (a + b)² = a² + 2ab + b², (a − b)² = a² − 2ab + b² y (a + b)(a − b) = a² − b².',
+ r:'Cada término tiene coeficiente, variable y exponente: en 3x², el coeficiente es 3, la variable es x y el exponente es 2.',
+ a:'Una letra es una caja que guarda un número. (a + b)² es el área de un cuadrado de lado a + b, repartida en cuatro piezas.',
+ e:'Desarrolla (x + 3)² y (x − 2)(x + 2).'},
+{n:'Factorización',
+ c:'Factorizar es escribir una expresión como producto de factores. Casos básicos: factor común, ax + ay = a(x + y); diferencia de cuadrados, a² − b² = (a + b)(a − b); y trinomio, x² + (p + q)x + pq = (x + p)(x + q).',
+ r:'Se pasa de la forma desarrollada (suma de términos) a la forma factorizada (producto entre paréntesis), y se verifica multiplicando de vuelta.',
+ a:'Es desarmar un mueble para ver de qué piezas está hecho. Multiplicar es volver a armarlo.',
+ e:'Factoriza 3x + 6 y x² + 5x + 6.'},
+{n:'Ecuaciones',
+ c:'Una ecuación es una igualdad con una incógnita que solo se cumple para ciertos valores. Resolverla es hallar esos valores. En una ecuación lineal ax + b = c con a ≠ 0, la solución es x = (c − b)/a. Siempre se comprueba reemplazando el valor en la ecuación original.',
+ r:'Los problemas se traducen del lenguaje cotidiano al algebraico: «el triple de un número menos 5» se escribe 3x − 5.',
+ a:'Una ecuación es una balanza en equilibrio: lo que haces de un lado, lo haces del otro.',
+ e:'Resuelve 3x − 5 = 10. Luego plantea y resuelve: un taxi cobra $4.000 fijos más $1.500 por kilómetro. Si pagaste $13.000, ¿cuántos kilómetros recorriste?'},
+{n:'Inecuaciones',
+ c:'Una inecuación compara expresiones con <, >, ≤ o ≥. Su solución es un conjunto de valores, no uno solo. Regla clave: al multiplicar o dividir por un número negativo, el sentido de la desigualdad se invierte.',
+ r:'En la recta numérica: círculo abierto si el extremo no se incluye (< o >) y cerrado si se incluye (≤ o ≥). En intervalos: x < 5 se escribe (−∞, 5).',
+ a:'Es un límite de velocidad: no hay un único valor válido, sino toda una zona permitida.',
+ e:'Resuelve 2x − 3 < 7 y escribe la solución como intervalo.'}
+]},
+{t:'Unidad 3. Geometría fundamental y trigonometría', s:'Mide y calcula el mundo', c:'u3', k:[
+{n:'Plano cartesiano y distancia',
+ c:'El plano cartesiano son dos rectas numéricas perpendiculares (eje x y eje y) que se cortan en el origen O(0, 0). Cada punto se ubica con un par ordenado (x, y) y el plano queda dividido en cuatro cuadrantes. La distancia entre A(x₁, y₁) y B(x₂, y₂) es d = √[(x₂ − x₁)² + (y₂ − y₁)²].',
+ r:'Se escribe P(x, y): primero el desplazamiento horizontal y luego el vertical. La fórmula de distancia es el teorema de Pitágoras aplicado al plano.',
+ a:'Es un mapa de ciudad con calles y carreras: cada punto es una dirección. La distancia es el camino «a vuelo de pájaro».',
+ e:'Ubica A(1, 2) y B(4, 6) y calcula la distancia entre ellos.'},
+{n:'Área y volumen',
+ c:'El área mide una superficie y se expresa en unidades cuadradas (m²). El volumen mide el espacio que ocupa un cuerpo y se expresa en unidades cúbicas (m³). Rectángulo: A = base × altura. Triángulo: A = (base × altura)/2. Círculo: A = πr². Prisma rectangular: V = largo × ancho × alto. Cilindro: V = πr²h.',
+ r:'Se escribe la fórmula, se reemplazan los datos con sus unidades y se verifica que el resultado tenga la unidad correcta.',
+ a:'El área es la pintura que necesitas para cubrir una pared; el volumen, el agua que cabe en un tanque.',
+ e:'Un tanque mide 2 m × 3 m × 1,5 m. Calcula su volumen y el área de una cara de 2 m × 3 m.'},
+{n:'Pitágoras, seno, coseno y tangente',
+ c:'En un triángulo rectángulo, la hipotenusa c es el lado opuesto al ángulo recto y los catetos son a y b. Teorema de Pitágoras: a² + b² = c². Para un ángulo agudo θ: sen θ = cateto opuesto / hipotenusa, cos θ = cateto adyacente / hipotenusa y tan θ = cateto opuesto / cateto adyacente.',
+ r:'Se dibuja el triángulo, se marca el ángulo θ y se rotulan los lados respecto a él: opuesto, adyacente e hipotenusa. Los ángulos se miden en grados o en radianes.',
+ a:'Una escalera apoyada en la pared forma un triángulo rectángulo. Pitágoras relaciona sus lados; seno, coseno y tangente relacionan el ángulo con la altura y el alcance.',
+ e:'Una escalera de 5 m se apoya con su base a 3 m de la pared. ¿Qué altura alcanza? ¿Cuánto vale el seno del ángulo que forma con el suelo?'},
+{n:'Identidades trigonométricas',
+ c:'Una identidad es una igualdad que se cumple para todo ángulo donde las expresiones están definidas. Fundamentales: sen²θ + cos²θ = 1 y tan θ = sen θ / cos θ. Suma de ángulos: sen(α + β) = sen α cos β + cos α sen β y cos(α + β) = cos α cos β − sen α sen β.',
+ r:'Para demostrar una identidad se transforma uno de los lados, paso a paso, hasta que quede igual al otro.',
+ a:'Es una regla que siempre se cumple, como que las porciones de una pizza suman la pizza entera: sen²θ + cos²θ = 1.',
+ e:'Si sen θ = 3/5 y θ es un ángulo agudo, usa la identidad para hallar cos θ.'}
+]}];
+$('units').innerHTML = U.map(u => '<div class="unit" style="--c:var(--' + u.c + ')"><h3>' + u.t + '<small>' + u.s + '</small></h3>' + u.k.map(k =>
+ '<details><summary>' + k.n + '</summary><p><b>Concepto.</b> ' + k.c + '</p><p><b>Cómo se representa.</b> ' + k.r + '</p><p><b>Analogía.</b> ' + k.a + '</p><p class="ex"><b>Ejercicio.</b> ' + k.e + '</p><button type="button" class="ask" data-q="Quiero practicar ' + k.n.toLowerCase() + '.">Practicar con el tutor</button></details>').join('') + '</div>').join('');
+
+$('send').disabled = false;
+</script>
+</body>
+</html>
